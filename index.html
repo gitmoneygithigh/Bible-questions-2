@@ -4,20 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Біблійні вірші</title>
+    <link rel="icon" href="book.png">
     <style>
         body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: auto;
+            height: 100vh;
             background-color: #f4f4f4;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-self: center;
+        }
+        #game-div {
+            top: 0px;
+            /* border: 2px solid red; */
+            position: absolute;
+            width: 100vw;
+            max-width: 800px;
+            height: 100vh;
         }
         #movable-div {
+            bottom: 0px;
+            position: absolute;
             width: 100px;
-            height: 20px;
+            height: 26px;
             background-color: red;
+        }
+        #bible-container {
+            max-width: 800px;
         }
         .question-container {
             background-color: white;
@@ -48,6 +64,78 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {            
+            const movableDiv = document.getElementById('movable-div');
+            const gameDivWidth = document.getElementById('game-div').offsetWidth;
+            const movableDivWidth = document.getElementById('movable-div').offsetWidth;
+            movableDiv.style.backgroundColor = 'grey';
+            var globalID;
+            var stepSize = 2;
+            var shift = 0;
+            var shiftDirection = 1;
+            var moving = false;
+            var maxPosition = gameDivWidth - movableDivWidth;
+            function showInfo() {
+                console.log(globalID + " is globalID");
+                console.log(shift + " is shift");
+                console.log(shiftDirection + " is shiftDirection");
+                console.log(moving + " is moving");
+                console.log(" ");
+            }
+            function step() {
+                if (shiftDirection === 1) {
+                    shift += stepSize;
+                    if (shift > maxPosition - stepSize) {
+                        shift = maxPosition;
+                        cancelAnimationFrame(globalID);
+                        moving = false;
+                        return;
+                    }
+                } else if (shiftDirection === -1) {
+                    shift -= stepSize;
+                    if (shift < stepSize) {
+                        shift = 0;
+                        cancelAnimationFrame(globalID);
+                        moving = false;
+                        return;
+                    }
+                }
+                movableDiv.style.transform = `translateX(${shift}px)`;
+                globalID = requestAnimationFrame(step);
+            }
+            document.addEventListener('keyup', function(event) {
+                if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                    cancelAnimationFrame(globalID);
+                    moving = false;
+                    console.log('stopped');
+                    showInfo();
+                }
+            });
+            document.addEventListener('keydown', function(event) {
+                if (!moving) {
+                    if (event.key === "ArrowRight") {
+                        shiftDirection = 1;
+                    } else if (event.key === "ArrowLeft") {
+                        shiftDirection = -1;
+                    }
+                    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                        if (shift <= 0 && shiftDirection === -1) {
+                            return;
+                        } else if (shift >= maxPosition && shiftDirection === 1) {
+                            return;
+                        } else {
+                            moving = true;
+                            globalID = requestAnimationFrame(step);
+                            console.log('started on keydown');
+                            showInfo();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="bible-container">
     <div class="question-container">
         <div class="question">Чому ти не на війні?</div>
         <div class="answer">
@@ -75,7 +163,9 @@
         <div class="answer">
             "А от коли ви побачите Єрусалим, оточений військами, тоді знайте, що час його спустошення наближається. Всі ті, хто лишатимуться в Юдеї, змушені будуть рятувати життя, тікаючи в гори" (<a href="https://www.biblegateway.com/bible?passage=Luke+21:20-21&version=UKR">Луки 21:20,21</a>)
         </div>
+    </div></div>
+    <div id="game-div">
+        <div id="movable-div"></div>
     </div>
-    <div id="movable-div"></div>
 </body>
 </html>
