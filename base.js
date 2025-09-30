@@ -25,6 +25,9 @@ class MovableBase {
         this.element.style.backgroundColor = 'grey';
         this.element.style.transform = `translateX(${this.shift}px)`;
     }
+    getPosition() {
+        return this.shift;
+    }
     checkEdgeCase() {
         if (this.shift >= this.maxPosition) {
             this.shift = this.maxPosition;
