@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             wallBlock.style.border = '1px solid black';
             wallBlock.style.width = `${blockWidth}px`;
             wallBlock.style.height = `${blockHeight}px`;
-            wallBlock.style.backgroundColor = 'pink';
+            //wallBlock.style.backgroundColor = 'pink';
             gameDiv.appendChild(wallBlock);
         }
     }
