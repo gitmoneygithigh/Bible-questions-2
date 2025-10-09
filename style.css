@@ -1,0 +1,62 @@
+body {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    font-family: Arial, sans-serif;
+    margin: auto;
+    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+#ball-div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    border-radius: 50%;
+}
+#game-div {
+    top: 0px;
+    /* border: 2px solid red; */
+    position: absolute;
+    width: 100vw;
+    max-width: 800px;
+    height: 100vh;
+}
+#movable-div {
+    bottom: 0px;
+    position: absolute;
+    width: 100px;
+    height: 26px;
+    background-color: red;
+}
+#bible-container {
+    max-width: 800px;
+}
+.question-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.question {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+.answer {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #3498db;
+}
+.answer a {
+    color: #2980b9;
+    text-decoration: none;
+}
+.answer a:hover {
+    text-decoration: underline;
+}
