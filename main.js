@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
             gameDiv.appendChild(wallBlock);
         }
     }
-    addDiv(blocksNeeded);
+    //addDiv(blocksNeeded);
     console.log(blockArray);
     removeDiv();
     console.log(removedBlocksCount + ' blocks removed');
